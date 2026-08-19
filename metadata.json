@@ -1,0 +1,6 @@
+{
+  "name": "Slab and Footing Designer",
+  "description": "An advanced engineering tool for structural analysis, design, and detailed scheduling of slabs, combined footings, strap foundations, and structural detailing systems matching ACI standards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
