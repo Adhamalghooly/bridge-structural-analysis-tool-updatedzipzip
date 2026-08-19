@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "BX_4siC--bYS0T-77vu5i"
+uri = "file://artifacts/StructuralMaster-ACI318-debug.apk"
+type = "unspecified"
+title = "Structural Master — APK جاهز للتثبيت"
+description = "نسخة Android مبنية عبر Capacitor، تحتوي على آخر تعديلات ACI 318-19. الحجم 6.3 MB. هذه نسخة Debug قابلة للتثبيت للاختبار."

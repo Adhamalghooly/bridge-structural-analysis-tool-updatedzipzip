@@ -1,2 +1,3 @@
 - [Mobile nav tab mapping](mobile-nav-tabs.md) — BottomNav 'foundations'→'foundations', 'solver'→'design' (not sub-item IDs); mismatch breaks mobile content.
 - [Audit report findings](audit-findings.md) — ACI 318-19 compliance audit; many fixes done, key remaining items tracked.
+- [Capacitor Android build](capacitor-android-build.md) — Capacitor 8 APK builds need Java 21, Android SDK 36, and a valid Gradle wrapper.
