@@ -390,7 +390,34 @@ export default function FoundationDrawingsPanel({
   };
 
   const handleDXFExport = () => {
-    const dxfInputs: FoundationDXFInput[] = projectData.types.flatMap((type) => {
+    // Prefer the batch USD results when available. This keeps DXF geometry,
+    // bar schedules, and pass/fail flags synchronized with the actual
+    // ACI 318-19 footing design rather than the legacy detailing estimate.
+    const usdInputs: FoundationDXFInput[] = (foundationResults || []).map((r: any) => ({
+      colId: r.colId,
+      x: r.x ?? 0,
+      y: r.y ?? 0,
+      colB: r.colB ?? 300,
+      colH: r.colH ?? 300,
+      B: r.B,
+      L: r.L,
+      t: r.t,
+      d: r.d ?? Math.max(0, r.t - 75),
+      P_service: r.P_service ?? 0,
+      q_actual: r.q_actual ?? 0,
+      bars_x: r.bars_x ?? 0,
+      dia_x: r.dia_x ?? 0,
+      spacing_x: r.spacing_x ?? 0,
+      bars_y: r.bars_y ?? 0,
+      dia_y: r.dia_y ?? 0,
+      spacing_y: r.spacing_y ?? 0,
+      bearing_ok: r.bearing_ok,
+      wide_shear_ok: r.wide_shear_ok,
+      punch_shear_ok: r.punch_shear_ok,
+      adequate: r.adequate
+    }));
+
+    const dxfInputs: FoundationDXFInput[] = usdInputs.length > 0 ? usdInputs : projectData.types.flatMap((type) => {
       const locsOfType = projectData.locations.filter(l => l.typeMark === type.typeMark);
       return locsOfType.map(loc => ({
         colId: loc.colId,

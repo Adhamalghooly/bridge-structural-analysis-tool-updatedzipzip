@@ -27,6 +27,7 @@ description: Tracks which Arabic audit-report items are fixed and which remain; 
 - `handleImportFootingDimensions()` reads B/L/t from the matching (or heaviest) USD footing result
 - New "استيراد أبعاد من تصميم USD" button (disabled when no results, tooltip explains why)
 - `handleImportColumnLoads` also auto-imports footing dims from batchResults when available
+- ETABS reaction Fz is now used in batch USD footing design when pointId matches a column; documented 70/30 D/L estimate is used because the imported reaction is total service compression
 
 ### FoundationDesignPanel.tsx
 - Passes `batchResults` to `<FoundationSettlementPanel>`
@@ -34,6 +35,11 @@ description: Tracks which Arabic audit-report items are fixed and which remain; 
 ### pdfReport.ts
 - `generateStructuralReport` accepts optional 13th arg `foundationResults: any[]`
 - Adds Section 11 (Foundation Design Summary table) when foundationResults is non-empty
+- `FoundationDrawingsPanel` DXF export prefers batch USD results (geometry, bars, checks) and falls back to legacy detailing only when no USD results exist
+
+### BOQ / Settlement exports
+- Ribbed slab filler-block count is generated as BOQ item 4.03A from rib spacing, rib width, slab area, and 5% waste
+- Settlement workspace exports the active isolated/strip/combined/raft result to CSV
 
 ### Previously confirmed already correct
 - ETABS Full Import section parsing (beam b/h, column b/h)
@@ -49,11 +55,7 @@ description: Tracks which Arabic audit-report items are fixed and which remain; 
 | Item | Where | Complexity |
 |------|--------|-----------|
 | Strip/combined/strap footing results → `onResultsChange` → BOQ/BBS | FoundationDesignPanel | Medium |
-| Foundation DXF/export: `FoundationDrawingsPanel` still uses WSM engine | FoundationDrawingsPanel | High |
-| BOQ ribbed slab filler-block count line item | BOQPanel.tsx | Low |
-| Settlement results not in any export/report | FoundationSettlementPanel | Low |
 | `betaDns` dynamic slenderness for basic column path — now partially fixed; biaxial path (`designColumnBiaxial` / Phase 3) handles it via MxTop/MxBot | structuralEngine.ts | Low |
-| ETABS reactions → P_DL/P_LL split hardcoded 60/40 | foundationDesign.ts | Medium |
 | Dead code: `src/generative/optimizer.ts` imported but unused outside GenerativeDesignDashboard | optimizer.ts | Trivial |
 | Pattern loading for ribbed slabs | structuralEngine.ts | High |
 
