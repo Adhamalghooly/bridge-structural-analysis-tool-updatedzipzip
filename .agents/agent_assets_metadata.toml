@@ -7,3 +7,17 @@ uri = "file://artifacts/StructuralMaster-ACI318-debug.apk"
 type = "unspecified"
 title = "Structural Master — APK جاهز للتثبيت"
 description = "نسخة Android مبنية عبر Capacitor، تحتوي على آخر تعديلات ACI 318-19. الحجم 6.3 MB. هذه نسخة Debug قابلة للتثبيت للاختبار."
+
+[[outputs]]
+id = "y9YCNB9klDcK0Hu389l_w"
+uri = "file://artifacts/StructuralMaster-local-updater.apk"
+type = "unspecified"
+title = "Structural Master — APK مع التحديث المحلي"
+description = "نسخة Android محدثة عبر Capacitor، تتضمن اختيار ملف ZIP أو مجلد تحديث محلي وإعادة تحميل الواجهة. الحجم 9.4 MB."
+
+[[outputs]]
+id = "szOa-XL1OPFWpfcmCxcMK"
+uri = "file://artifacts/StructuralMaster-local-update.zip"
+type = "unspecified"
+title = "Structural Master — حزمة تحديث محلية"
+description = "حزمة dist جاهزة للاختيار من داخل التطبيق عبر الإعدادات → التحديث المحلي. تحتوي index.html في الجذر. الحجم 1.7 MB."
