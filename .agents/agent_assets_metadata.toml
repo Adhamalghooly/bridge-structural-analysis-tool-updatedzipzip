@@ -21,3 +21,17 @@ uri = "file://artifacts/StructuralMaster-local-update.zip"
 type = "unspecified"
 title = "Structural Master — حزمة تحديث محلية"
 description = "حزمة dist جاهزة للاختيار من داخل التطبيق عبر الإعدادات → التحديث المحلي. تحتوي index.html في الجذر. الحجم 1.7 MB."
+
+[[outputs]]
+id = "I5jxOxVvv5MD7fjj0AFAs"
+uri = "file://artifacts/StructuralMaster-mobile-settings-updater.apk"
+type = "unspecified"
+title = "Structural Master — APK للهاتف مع الإعدادات"
+description = "نسخة Android النهائية بعد إضافة زر الإعدادات والتحديث المحلي الثابت أعلى شاشة الهاتف. الحجم 9.4 MB."
+
+[[outputs]]
+id = "RRoRCmfa5MMwGmV6Luekp"
+uri = "file://artifacts/StructuralMaster-mobile-settings-update.zip"
+type = "unspecified"
+title = "Structural Master — حزمة تحديث الهاتف"
+description = "حزمة تحديث محلية متوافقة مع النسخة الجديدة، وتتضمن واجهة زر الإعدادات على الهاتف. الحجم 1.7 MB."
