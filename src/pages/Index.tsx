@@ -42,6 +42,7 @@ import {
 } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import BottomNav, { type MainTab } from "@/components/BottomNav";
+import MobileLocalUpdateButton from "@/components/MobileLocalUpdateButton";
 import AppSidebar, { NAV } from "@/components/AppSidebar";
 import StatusBar from "@/components/StatusBar";
 import BreadcrumbBar from "@/components/BreadcrumbBar";
@@ -4383,9 +4384,11 @@ const Index = () => {
 
       {/* Bottom Navigation — mobile only */}
       {isMobile && (
-        <BottomNav
-          activeTab={mainTab}
-          onTabChange={(tab) => {
+        <>
+          <MobileLocalUpdateButton />
+          <BottomNav
+            activeTab={mainTab}
+            onTabChange={(tab) => {
             setMainTab(tab);
             // Each section maps to a specific TabsContent value.
             // 'foundations' and 'solver' are special: their TabsContent values
@@ -4402,8 +4405,9 @@ const Index = () => {
               const sec = NAV.find(s => s.id === tab);
               if (sec?.subs?.[0]) dispatch({ type: 'SET_ACTIVE_TAB', tab: sec.subs[0].id });
             }
-          }}
-        />
+            }}
+          />
+        </>
       )}
     </div>
   );
