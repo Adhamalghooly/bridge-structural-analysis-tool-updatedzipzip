@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite --port 3000 --host 0.0.0.0",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "update:bundle": "bash scripts/create-local-update.sh"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.0",

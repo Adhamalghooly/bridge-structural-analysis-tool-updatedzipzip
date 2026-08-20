@@ -1,1 +1,0 @@
-import{i as e}from"./index-CgDJyvcQ.js";var t=e(`PrintPlugin`,{web:{async printHTML({html:e}){let t=new Blob([e],{type:`text/html; charset=utf-8`}),n=URL.createObjectURL(t),r=window.open(n,`_blank`);r&&r.addEventListener(`load`,()=>{setTimeout(()=>{r.print(),URL.revokeObjectURL(n)},800)})}}});export{t as PrintPlugin};

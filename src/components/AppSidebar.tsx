@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { LocalUpdate } from '@/lib/localUpdatePlugin';
 
 interface NavSubItem {
   id: string;
@@ -108,6 +110,54 @@ export { NAV };
 export type { NavSection, NavSubItem };
 
 export default function AppSidebar({ mainTab, activeTab, collapsed, onNavigate }: AppSidebarProps) {
+  const [updateOpen, setUpdateOpen] = useState(false);
+  const [updateBusy, setUpdateBusy] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState('');
+  const [updateActive, setUpdateActive] = useState(false);
+
+  const openUpdateManager = async () => {
+    setUpdateOpen(true);
+    if (!Capacitor.isNativePlatform()) {
+      setUpdateStatus('هذه الوظيفة متاحة داخل تطبيق Android فقط.');
+      return;
+    }
+    try {
+      const status = await LocalUpdate.getStatus();
+      setUpdateActive(status.active);
+      setUpdateStatus(status.active ? 'يوجد تحديث محلي مُفعّل حالياً.' : 'لا يوجد تحديث محلي مُفعّل.');
+    } catch {
+      setUpdateStatus('تعذر قراءة حالة التحديث المحلي.');
+    }
+  };
+
+  const chooseLocalUpdate = async (mode: 'zip' | 'folder') => {
+    setUpdateBusy(true);
+    setUpdateStatus('جارٍ قراءة ملفات التحديث والتحقق منها...');
+    try {
+      const status = mode === 'zip'
+        ? await LocalUpdate.pickUpdatePackage()
+        : await LocalUpdate.pickUpdateFolder();
+      setUpdateActive(status.active);
+      setUpdateStatus('تم تثبيت التحديث المحلي وإعادة تحميل الواجهة.');
+    } catch (error: any) {
+      setUpdateStatus(error?.message || 'تم إلغاء العملية أو فشل التحديث.');
+    } finally {
+      setUpdateBusy(false);
+    }
+  };
+
+  const clearLocalUpdate = async () => {
+    setUpdateBusy(true);
+    try {
+      await LocalUpdate.clearUpdate();
+      setUpdateActive(false);
+      setUpdateStatus('تمت إزالة التحديث المحلي والعودة إلى النسخة الأصلية.');
+    } catch {
+      setUpdateStatus('تعذر إزالة التحديث المحلي.');
+    } finally {
+      setUpdateBusy(false);
+    }
+  };
   const [expanded, setExpanded] = useState<string | null>(mainTab);
 
   const C = {
@@ -280,7 +330,7 @@ export default function AppSidebar({ mainTab, activeTab, collapsed, onNavigate }
       {/* Bottom settings */}
       {!collapsed && (
         <div style={{ padding: '12px 14px', borderTop: '1px solid rgba(255,255,255,0.07)', display: 'flex', flexDirection: 'column', gap: 6 }}>
-          <button style={{
+           <button onClick={openUpdateManager} style={{
             display: 'flex', alignItems: 'center', gap: 8, padding: '7px 10px',
             borderRadius: 8, border: 'none', background: 'rgba(255,255,255,0.06)',
             color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: 12,
@@ -291,6 +341,61 @@ export default function AppSidebar({ mainTab, activeTab, collapsed, onNavigate }
           </button>
         </div>
       )}
+       {updateOpen && (
+         <div style={overlayStyle} onClick={() => !updateBusy && setUpdateOpen(false)}>
+           <div onClick={e => e.stopPropagation()} dir="rtl" style={modalStyle}>
+             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, alignItems: 'start' }}>
+               <div>
+                 <h2 style={{ margin: 0, fontSize: 18, fontWeight: 800 }}>التحديث المحلي</h2>
+                 <p style={{ margin: '8px 0 0', fontSize: 12, lineHeight: 1.7, color: '#475569' }}>
+                   اختر ملف ZIP أو مجلد يحتوي على ملفات بناء React، ويجب أن يحتوي على index.html.
+                 </p>
+               </div>
+               <button onClick={() => setUpdateOpen(false)} style={closeButtonStyle}>×</button>
+             </div>
+             <div style={{
+               marginTop: 16, padding: 12, borderRadius: 10,
+               background: updateActive ? '#ecfdf5' : '#f8fafc',
+               color: updateActive ? '#047857' : '#475569', fontSize: 12,
+             }}>
+               {updateStatus || 'لا يوجد تحديث محلي مُفعّل.'}
+             </div>
+             <div style={{ display: 'grid', gap: 9, marginTop: 16 }}>
+               <button disabled={updateBusy} onClick={() => chooseLocalUpdate('zip')} style={updateButton('#1d4ed8')}>
+                 اختيار ملف تحديث ZIP
+               </button>
+               <button disabled={updateBusy} onClick={() => chooseLocalUpdate('folder')} style={updateButton('#0f766e')}>
+                 تحديد مجلد التحديث
+               </button>
+               {updateActive && (
+                 <button disabled={updateBusy} onClick={clearLocalUpdate} style={updateButton('#b91c1c')}>
+                   إزالة التحديث والعودة للنسخة الأصلية
+                 </button>
+               )}
+             </div>
+             <p style={{ margin: '14px 0 0', fontSize: 11, color: '#64748b', lineHeight: 1.7 }}>
+               التحديث يعمل دون إنترنت. استخدم مجلد dist أو ملف ZIP يحتوي على محتوياته.
+             </p>
+           </div>
+         </div>
+       )}
     </aside>
   );
 }
+
+const overlayStyle: CSSProperties = {
+  position: 'fixed', inset: 0, zIndex: 1000, display: 'flex',
+  alignItems: 'center', justifyContent: 'center',
+  background: 'rgba(2, 6, 23, 0.65)', padding: 20,
+};
+const modalStyle: CSSProperties = {
+  width: 'min(460px, 100%)', borderRadius: 16, padding: 22,
+  background: '#fff', color: '#0f172a', boxShadow: '0 20px 60px rgba(0,0,0,.3)',
+};
+const closeButtonStyle: CSSProperties = {
+  border: 0, background: 'transparent', fontSize: 20, cursor: 'pointer',
+};
+const updateButton = (background: string): CSSProperties => ({
+  border: 0, borderRadius: 9, padding: '11px 14px', color: '#fff',
+  background, cursor: 'pointer', fontSize: 13, fontWeight: 700,
+});

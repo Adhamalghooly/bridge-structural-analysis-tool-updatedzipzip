@@ -24,6 +24,7 @@ MERGED from [androidx.core:core-splashscreen:1.2.0] /home/runner/.gradle/caches/
 MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /home/runner/.gradle/caches/8.14.3/transforms/bee8f78bb28e6cb788edd05c601f4778/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.appcompat:appcompat:1.7.1] /home/runner/.gradle/caches/8.14.3/transforms/c3f09e8abd8bb01c9314454bd06bb337/transformed/appcompat-1.7.1/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.3.0] /home/runner/.gradle/caches/8.14.3/transforms/ef97883a45eaa5cc79115d450cce1dbe/transformed/coordinatorlayout-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.documentfile:documentfile:1.0.1] /home/runner/.gradle/caches/8.14.3/transforms/8c4ddf1c337afc6d42324e1f492e2861/transformed/documentfile-1.0.1/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.fragment:fragment:1.8.9] /home/runner/.gradle/caches/8.14.3/transforms/754c4f1b691d2a1223e4f8f413992fee/transformed/fragment-1.8.9/AndroidManifest.xml:2:1-7:12
 MERGED from [io.ionic.libs:ionfilesystem-android:1.1.0] /home/runner/.gradle/caches/8.14.3/transforms/8dd8bcc58e1446815d455b0e441e2e60/transformed/ionfilesystem-android-1.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.activity:activity-ktx:1.11.0] /home/runner/.gradle/caches/8.14.3/transforms/b1b6c7d44bdce8f4e30ff96e9d1948e3/transformed/activity-ktx-1.11.0/AndroidManifest.xml:2:1-7:12
@@ -173,6 +174,8 @@ MERGED from [androidx.appcompat:appcompat:1.7.1] /home/runner/.gradle/caches/8.1
 MERGED from [androidx.appcompat:appcompat:1.7.1] /home/runner/.gradle/caches/8.14.3/transforms/c3f09e8abd8bb01c9314454bd06bb337/transformed/appcompat-1.7.1/AndroidManifest.xml:5:5-44
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.3.0] /home/runner/.gradle/caches/8.14.3/transforms/ef97883a45eaa5cc79115d450cce1dbe/transformed/coordinatorlayout-1.3.0/AndroidManifest.xml:5:5-44
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.3.0] /home/runner/.gradle/caches/8.14.3/transforms/ef97883a45eaa5cc79115d450cce1dbe/transformed/coordinatorlayout-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.1] /home/runner/.gradle/caches/8.14.3/transforms/8c4ddf1c337afc6d42324e1f492e2861/transformed/documentfile-1.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.1] /home/runner/.gradle/caches/8.14.3/transforms/8c4ddf1c337afc6d42324e1f492e2861/transformed/documentfile-1.0.1/AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.8.9] /home/runner/.gradle/caches/8.14.3/transforms/754c4f1b691d2a1223e4f8f413992fee/transformed/fragment-1.8.9/AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment:1.8.9] /home/runner/.gradle/caches/8.14.3/transforms/754c4f1b691d2a1223e4f8f413992fee/transformed/fragment-1.8.9/AndroidManifest.xml:5:5-44
 MERGED from [io.ionic.libs:ionfilesystem-android:1.1.0] /home/runner/.gradle/caches/8.14.3/transforms/8dd8bcc58e1446815d455b0e441e2e60/transformed/ionfilesystem-android-1.1.0/AndroidManifest.xml:5:5-44
